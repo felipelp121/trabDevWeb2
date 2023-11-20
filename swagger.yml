@@ -1,0 +1,218 @@
+swagger: "2.0"
+info:
+  description: "Documentação da API"
+  version: "1.0.0"
+  title: "API de Atividades"
+basePath: "/api/{version}"
+schemes:
+  - "https"
+paths:
+  /events/{eventId}/activity:
+    get:
+      summary: "Visualizar Todas as Atividades Sem Detalhe"
+      parameters:
+        - name: eventId
+          in: path
+          required: true
+          type: "number"
+      responses:
+        200:
+          description: "Lista de atividades obtida com sucesso"
+          schema:
+            type: "array"
+            items:
+              type: "object"
+              properties:
+                id:
+                  type: "number"
+                name:
+                  type: "string"
+                link:
+                  type: "string"
+        404:
+          description: "Evento não encontrado"
+    post:
+      summary: "Cadastrar Atividade"
+      parameters:
+        - name: "eventId"
+          in: "path"
+          required: true
+          type: "number"
+        - name: "body"
+          in: "body"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              name:
+                type: "string"
+              type:
+                type: "string"
+              description:
+                type: "string"
+              date:
+                type: "string"
+                format: "date"
+              start_time:
+                type: "string"
+                format: "time"
+              end_time:
+                type: "string"
+                format: "time"
+              location_id:
+                type: "array"
+                items:
+                  type: "number"
+      responses:
+        201:
+          description: "Atividade cadastrada com sucesso"
+        400:
+          description: "Requisição inválida"
+        404:
+          description: "Evento não encontrado"
+  /events/{eventId}/activity/{activityId}:
+    get:
+      summary: "Visualização Única com Detalhe"
+      parameters:
+        - name: "eventId"
+          in: "path"
+          required: true
+          type: "number"
+        - name: "activityId"
+          in: "path"
+          required: true
+          type: "number"
+      responses:
+        200:
+          description: "Detalhes da atividade obtidos com sucesso"
+          schema:
+            type: "object"
+            properties:
+              id:
+                type: "number"
+              name:
+                type: "string"
+              type:
+                type: "string"
+              description:
+                type: "string"
+              date:
+                type: "string"
+                format: "date"
+              start_time:
+                type: "string"
+                format: "time"
+              end_time:
+                type: "string"
+                format: "time"
+              location:
+                type: "array"
+                items:
+                  type: "object"
+                  properties:
+                    id:
+                      type: "number"
+                    name:
+                      type: "string"
+                    location:
+                      type: "string"
+                    capacity:
+                      type: "number"
+                    resource:
+                      type: "array"
+                      items:
+                        type: "string"
+        404:
+          description: "Atividade ou evento não encontrados"
+    put:
+      summary: "Editar Atividade"
+      parameters:
+        - name: "eventId"
+          in: "path"
+          required: true
+          type: "number"
+        - name: "activityId"
+          in: "path"
+          required: true
+          type: "number"
+        - name: "body"
+          in: "body"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              name:
+                type: "string"
+              type:
+                type: "string"
+              description:
+                type: "string"
+              date:
+                type: "string"
+                format: "date"
+              start_time:
+                type: "string"
+                format: "time"
+              end_time:
+                type: "string"
+                format: "time"
+              location_id:
+                type: "array"
+                items:
+                  type: "number"
+      responses:
+        200:
+          description: "Atividade editada com sucesso"
+        400:
+          description: "Requisição inválida"
+        404:
+          description: "Atividade ou evento não encontrados"
+    delete:
+      summary: "Remover Atividade"
+      parameters:
+        - name: "eventId"
+          in: "path"
+          required: true
+          type: "number"
+        - name: "activityId"
+          in: "path"
+          required: true
+          type: "number"
+      responses:
+        204:
+          description: "Atividade removida com sucesso"
+        404:
+          description: "Atividade ou evento não encontrados"
+  /events/{eventId}/activity/{activityId}/favorite:
+    post:
+      summary: "Favoritar Atividade"
+      parameters:
+        - name: "eventId"
+          in: "path"
+          required: true
+          type: "number"
+        - name: "activityId"
+          in: "path"
+          required: true
+          type: "number"
+      responses:
+        200:
+          description: "Atividade marcada como favorita com sucesso"
+        404:
+          description: "Atividade ou evento não encontrados"
+    delete:
+      summary: "Desfavoritar Atividade"
+      parameters:
+        - name: "eventId"
+          in: "path"
+          required: true
+          type: "number"
+        - name: "activityId"
+          in: "path"
+          required: true
+          type: "number"
+      responses:
+        200:
+          description: "Marcação de favorito removida com sucesso"
+        404:
+          description: "Atividade ou evento não encontrados"
