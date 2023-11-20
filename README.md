@@ -18,3 +18,9 @@ Por enquanto, trata-se apenas do design da API, e os endpoints ainda não estão
 2. Cole o conteúdo no site [https://editor.swagger.io/](https://editor.swagger.io/).
 
 Pronto! O design da API estará disponível para visualização e análise.
+
+
+ex:
+
+![image](https://github.com/felipelp121/trabDevWeb2/assets/41767599/2a810d86-f1a4-4140-bb19-cf480030e8de)
+
